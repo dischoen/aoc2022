@@ -37,15 +37,17 @@ try0() ->
     
     Sums = lists:map(fun(Ni) -> lists:sum(Ni) end, Numbers),
     Max = lists:max(Sums),
-    Index = find_max(Max, Sums, 1),
+    Index = find(Max, Sums),
     {Max, Index, Sums}.
                     
-find_max(Max, [Max|List], Idx) ->
+find(Elem, List) ->
+    find(Elem, List, 1).
+find(Elem, [], Idx) ->
+    enoent;
+find(Elem, [Elem|_List], Idx) ->
     Idx;
-find_max(Max, [_|List], Idx) ->
-    find_max(Max, List, Idx + 1);
-find_max(Max, [], Idx) ->
-    -1.
+find(Elem, [_|List], Idx) ->
+    find(Elem, List, Idx + 1).
     
     
     
